@@ -1,8 +1,8 @@
-function init()
-{
-    window.requestAnimationFrame(draw);
+// function init()
+// {
+//     window.requestAnimationFrame(draw);
 
-}
+// }
 
 	//Function for ball to start 
     var rand_position_x = function (width){
@@ -21,22 +21,36 @@ function init()
     var leftHandScore = 0;  //keep track of total weight on the left side of the seesaw
     var rightHandScore = 0; //keep track of the total weight on the right side of the seesaw
     var triangleHeight = 0;
+    var lineStart_x = 0;
+    var lineStart_y = 450;
+    var lineEnd_x = 500;
+    var lineEnd_y=450;
+
     
 
 //Draws Ball
 function draw() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
+    var seesaw = canvas.getContext("2d");
+
     ctx.clearRect(0,0,500,500); // clear canvas
     ctx.save();   
     ctx.beginPath(); 
     ctx.arc(ballPositionX, ballPositionY++, 10, 0, 2 *Math.PI);
     ctx.fill();
+
+    seesaw.beginPath();
+    seesaw.moveTo(lineStart_x, lineStart_y);
+    seesaw.lineTo(lineEnd_x, lineEnd_y);
+    seesaw.strokeStyle = '#ff0000';
+    seesaw.stroke();
+
+
     ctx.restore();
     window.requestAnimationFrame(draw);
 }
 
-init();
 setTimeout(draw(), 100000);
 
         
