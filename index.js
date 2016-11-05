@@ -21,7 +21,7 @@ function draw() {
       return Math.floor(Math.random() * (width + 1));
     };
         		
-    var ball_position_x = 0;	//position of the ball in x axis
+    var ball_position_x = 10;	//position of the ball in x axis
     var ball_weight = 0;			//weight of the ball
     var	seesaw_angle = 0;
     var weight_position = 0;	//position of the user movable weight
