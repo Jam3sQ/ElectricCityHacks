@@ -103,16 +103,14 @@ function keyDownHandler(keyPressed)
 {   
     var code = keyPressed.keyCode;
 
-    if (code == "37")
-    {       
-           console.log("keypressed");
-        x2+=50;
+    if (code == "37") //left key
+    {      
+        x2+=2;
         
     }
-    if (code == "39")
+    if (code == "39")   //right key
     {       
-           console.log("keypressed");
-        x2-=50;
+        x2-=2;
         
     }
 }
