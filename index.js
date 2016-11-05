@@ -66,6 +66,10 @@ function draw() {
     ctx.beginPath(); 
     ctx.arc(ballPositionX, ballPositionY++, 10, 0, 2 *Math.PI);
     ctx.fill();
+    if (ballPositionY == 500){
+    	ballPositionY = 0;
+    	ballPositionX = rand_position_x(500);
+    }
 
 
     lineDrawingParameters();
