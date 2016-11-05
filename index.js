@@ -40,6 +40,5 @@ ctx.fillRect (30, 30, 50, 50);
               	var weight = 10;
             };
         */
-        
-        function calculate_effective_weight(
+
         
