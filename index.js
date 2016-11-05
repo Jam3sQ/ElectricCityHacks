@@ -4,7 +4,7 @@ function init()
 
 }
 
-	//Function for ball to start 
+    //Function for ball to start 
     var rand_position_x = function (width){
       return Math.floor(Math.random() * (width + 1));
     };
@@ -21,7 +21,33 @@ function init()
     var leftHandScore = 0;  //keep track of total weight on the left side of the seesaw
     var rightHandScore = 0; //keep track of the total weight on the right side of the seesaw
     var triangleHeight = 0;
-    
+    var contactBall = false;
+    var contactPlank = false;
+    var x1 = 0; // x parameter for starting point for line
+    var x2 = width; // x parameter for ending point for line
+    var y1 = height - triangleHeight; // y parameter for starting point for line
+    var y2 = height - triangleHeight; // y parameter for ending point for line
+
+function scoreLogic(){
+    if ((ballPositionX - (width/2)) < 0) {
+        leftHandScore += (abs(ballPositionX - width/2)*ballWeight);
+    };
+    else if ((ballPositionX - (width/2)) > 0) {
+        rightHandScore += ((ballPositionX - width/2)*ballWeight);
+    };
+    totalScore = rightHandScore + leftHandScore;
+}
+
+function lineDrawingParameters () {
+    slope = (rightHandScore - leftHandScore + (playerWeight * (playerPosition- (width/2))))
+    y1 = (height - triangleHeight) + (slope * (width/2));
+    y2 = (height - triangleHeight) - (slope * (width/2));
+}
+
+function Contacts () {
+    contactBall = (abs(((ballPositionX-(width/2))*slope) - (-ballPositionY + height - triangleHeight)) < 1);
+    contactPlank = ((abs(y1 - height) < 1) || (abs(y2 - height) < 1))
+}
 
 //Draws Ball
 function draw() {
@@ -38,7 +64,3 @@ function draw() {
 
 init();
 setTimeout(draw(), 100000);
-
-        
-     
-        
