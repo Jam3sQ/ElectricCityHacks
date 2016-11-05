@@ -4,16 +4,40 @@
 	<title></title>
 	<style type="text/css">
 
+		h1{
+			text-align: center;
+		}
+
 		canvas{
 			border: 2px;
 			border-color: black; 
 			border-style: solid;
+			margin: auto;
 		}
+
+		.body-container{
+			height: 100vh;
+			width: 100vw;
+		}
+
+		.game-container{
+			width: 500px;
+			height: 600px;
+			margin: auto;
+		}
+
 	</style>
 </head>
 <body onload="draw()">
-<h1>Hello World</h1>
-<canvas id="canvas" width="500" height="500"></canvas>
+<div class="body-container">
+<div class="game-container">
+	<h1>Game</h1>
+	<canvas id="canvas" width="500" height="500"></canvas>
+</div>
+	
+	
+</div>
+
 
 
 
