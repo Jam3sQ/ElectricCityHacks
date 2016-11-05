@@ -30,28 +30,9 @@ function draw() {
     ctx.fillRect (ball_position_x, ball_position_x, ball_position_x, ball_position_x);
 
     ball_position_x++;
-            
-    
-            
-            /*
-     						var Ball = function (rand_position_x]) {
-                		var weight = 5;
-                  	this.position_x = rand_position_x;
-                  	var position_y = 100;
-                };
-            	
-            		var Seesaw = function() {
-                  	var angle = 0;
-                };
-                
-                var Weight = function() {
-                  	var distance = 0;
-                  	var weight = 10;
-                };
-            */
     window.requestAnimationFrame(draw);
 }
 
 init();
-setInterval(draw(), 10000)
+setInterval(draw(), 1000)
 
