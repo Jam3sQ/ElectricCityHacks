@@ -3,7 +3,7 @@ var ctx = canvas.getContext("2d");
 
 
 //var background = document.getElementbyTagName('body');
-    background.style.backgroundColor = "black";
+    //background.style.backgroundColor = "black";
         		
 var rand_position_x = function (width){
     return Math.floor(Math.random() * (width + 1));
