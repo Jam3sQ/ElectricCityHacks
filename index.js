@@ -2,7 +2,9 @@ function init()
 {
     window.requestAnimationFrame(draw);
 
-    var rand_position_x = function (width){
+}
+
+var rand_position_x = function (width){
       return Math.floor(Math.random() * (width + 1));
     };
             
@@ -13,9 +15,6 @@ function init()
             
     var left_total_weight = 0;  //keep track of total weight on the left side of the seesaw
     var right_total_weight = 0; //keep track of the total weight on the right side of the seesaw
-
-}
-
 
 function draw() {
 
