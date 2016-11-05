@@ -15,10 +15,12 @@
     var slope = 0;
     var width = 500;        //width of the canvas
     var height = 500;       //height of canvas
-    var playerPosition = 0;  //position of the user movable weight
-    var playerWeight = 0;
-    var leftHandScore = 100;  //keep track of total weight on the left side of the seesaw
-    var rightHandScore = 101; //keep track of the total weight on the right side of the seesaw
+    var length= width/2;  //position of the user movable weight
+    var weightPositionX = width/2;
+    var weightPositionY = (height-triangleHeight);
+    var playerWeight = 1;
+    var leftHandScore = 0;  //keep track of total weight on the left side of the seesaw
+    var rightHandScore = 0; //keep track of the total weight on the right side of the seesaw
     var triangleHeight = 50;
     var contactBall = false;
     var contactPlank = false;
@@ -31,7 +33,7 @@
 
 function scoreLogic(){
     if ((ballPositionX - (width/2)) < 0) {
-        leftHandScore += (abs(ballPositionX - width/2)*ballWeight);
+        leftHandScore += (Math.abs(ballPositionX - width/2)*ballWeight);
     };
     if((ballPositionX - (width/2)) > 0) {
         rightHandScore += ((ballPositionX - width/2)*ballWeight);
@@ -40,14 +42,14 @@ function scoreLogic(){
 }
 
 function lineDrawingParameters () {
-    slope = (rightHandScore - leftHandScore + (playerWeight * (playerPosition- (width/2))))/50;
+    slope = (rightHandScore - leftHandScore + (playerWeight * (length- (width/2))))/50;
     y1 = (height - triangleHeight) + (slope * (width/2));
     y2 = (height - triangleHeight) - (slope * (width/2));
 }
 
 function Contacts () {
-    contactBall = (abs(((ballPositionX-(width/2))*slope) - (-ballPositionY + height - triangleHeight)) < 1);
-    contactPlank = ((abs(y1 - height) < 1) || (abs(y2 - height) < 1))
+    contactBall = (Math.abs(((ballPositionX-(width/2))*slope) - (-ballPositionY + height - triangleHeight)) < 1);
+    contactPlank = ((Math.abs(y1 - height) < 1) || (Math.abs(y2 - height) < 1))
 }
 
 //Draws Ball
@@ -72,6 +74,10 @@ function draw() {
     }
 
     lineDrawingParameters();
+    scoreLogic();
+    Contacts();
+    calculateDeltaXY();
+
     seesaw.beginPath();
     seesaw.moveTo(x1, y1);  //line start
     seesaw.lineTo(x2, y2);  //line end
@@ -104,14 +110,33 @@ function keyDownHandler(keyPressed)
     var code = keyPressed.keyCode;
 
     if (code == "37") //left key
-    {      
-        x2+=2;
+    {   
+        console.log("leftbutton pressed");   
+        length-=2;
         
     }
     if (code == "39")   //right key
-    {       
-        x2-=2;
+    {   
+        console.log("rightbutton pressed");    
+        length+=2;
         
+    }
+}
+
+function calculateDeltaXY ()
+{
+    if(length<0)
+    {
+   
+        weightPositionX = (width/2)-Math.cos(Math.atan(slope))*(-1*length);
+        weightPositionY = (height-triangleHeight)-Math.sin(Math.atan(slope))*(-1*length);
+    }
+
+    if(length>0)
+    {
+     
+        weightPositionX = (width/2)+Math.cos(Math.atan(slope))*(-1*length);
+        weightPositionY = (height-triangleHeight)+Math.sin(Math.atan(slope))*(-1*length);
     }
 }
 
