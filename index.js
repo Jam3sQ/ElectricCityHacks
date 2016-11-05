@@ -4,7 +4,7 @@ function init()
 
 }
 
-var rand_position_x = function (width){
+    var rand_position_x = function (width){
       return Math.floor(Math.random() * (width + 1));
     };
             
@@ -53,5 +53,5 @@ function draw() {
 }
 
 init();
-setInterval(draw(), 1000)
+setInterval(draw(), 10000)
 
