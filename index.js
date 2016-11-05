@@ -10,7 +10,11 @@ function draw() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
-    ctx.clearRect(0,0,300,300); // clear canvas
+    ctx.clearRect(0,0,500,500); // clear canvas
+    ctx.save();
+
+
+
 
 
     var rand_position_x = function (width){
