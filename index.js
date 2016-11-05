@@ -15,7 +15,6 @@
     var slope = 0;
     var width = 500;        //width of the canvas
     var height = 500;       //height of canvas
-    console.log(width)
     var playerPosition = 0;  //position of the user movable weight
     var playerWeight = 0;
     var leftHandScore = 100;  //keep track of total weight on the left side of the seesaw
@@ -79,24 +78,43 @@ function draw() {
     seesaw.strokeStyle = '#ff0000';
     seesaw.stroke();
 
-    var debugText = canvas.getContext("2d");
-    debugText.font = "48px serif";
-    debugText.fillText(x1, 400, 400);
+    // var debugText = canvas.getContext("2d");
+    // debugText.font = "48px serif";
+    // debugText.fillText(x1, 400, 400);
+    document.addEventListener("keydown",keyDownHandler,false);
 
     var debugText = canvas.getContext("2d");
     debugText.font = "48px serif";
     debugText.fillText(y1, 400, 425);
 
-    var debugText = canvas.getContext("2d");
-    debugText.font = "48px serif";
-    debugText.fillText(x2, 400, 450);
+    // var debugText = canvas.getContext("2d");
+    // debugText.font = "48px serif";
+    // debugText.fillText(x2, 400, 450);
 
     var debugText = canvas.getContext("2d");
     debugText.font = "48px serif";
-    debugText.fillText(y2, 400, 475);
+    debugText.fillText(y2, 400, 450);
 
     ctx.restore();
     window.requestAnimationFrame(draw);
+}
+
+function keyDownHandler(keyPressed)
+{   
+    var code = keyPressed.keyCode;
+
+    if (code == "37")
+    {       
+           console.log("keypressed");
+        x2+=50;
+        
+    }
+    if (code == "39")
+    {       
+           console.log("keypressed");
+        x2-=50;
+        
+    }
 }
 
 setTimeout(draw(), 100000);
