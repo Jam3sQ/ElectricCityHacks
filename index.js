@@ -57,4 +57,5 @@ function draw() {
 }
 
 init();
+setTimeout(draw(), 1000)
 
