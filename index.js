@@ -49,6 +49,8 @@ function draw() {
                   	var weight = 10;
                 };
             */
-
+    window.requestAnimationFrame(draw);
 }
+
+init();
 
