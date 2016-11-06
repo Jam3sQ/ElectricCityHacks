@@ -2,10 +2,12 @@
     var rand_position_x = function (width){
       return Math.floor(Math.random() * (width + 1));
     };
-            
+
+    //Initialize Global variables       
     var ballPositionY = 0; //position of the ball in y axis
     var ballPositionX = rand_position_x(500); //position of ball in x axis
     var ballWeight = 0.0025;      //weight of the ball
+    var ballSpeed = 1;
     var slope = 0;
     var width = 500;        //width of the canvas
     var height = 500;       //height of canvas
@@ -23,6 +25,7 @@
     var x2 = width; // x parameter for ending point for line
     var y1 = (height - triangleHeight); // y parameter for starting point for line
     var y2 = (height - triangleHeight); // y parameter for ending point for line
+    var canvas = document.getElementById("canvas");
 
     
 
@@ -44,15 +47,22 @@ function lineDrawingParameters () {
     y2 = (height - triangleHeight) - (slope * (width/2));
 }
 
+function speed(){
+    console.log(ballSpeed);
+    return ballPositionY+=ballSpeed;
+}
+
 
 
 //Draws Ball
 function draw() {
-    var canvas = document.getElementById("canvas");
+    //Initialize drawing tools 
+    
     var ctx = canvas.getContext("2d");
     var seesaw = canvas.getContext("2d");
     var pivot = canvas.getContext('2d');
 
+    //display score??
     var debugText = canvas.getContext("2d");
     debugText.font = "20px serif";
     debugText.fillText(x1, 100, 100);
@@ -60,7 +70,8 @@ function draw() {
     ctx.clearRect(0,0,500,500); // clear canvas
     ctx.save();   
     ctx.beginPath(); 
-    ctx.arc(ballPositionX, ballPositionY+=3, 10, 0, 2 *Math.PI);
+    ctx.arc(ballPositionX, speed(), 10, 0, 2 *Math.PI);
+    ballSpeed += 0.005;
     ctx.fill();
 
     if (Math.abs(-ballPositionY + (-slope*(ballPositionX-250)+350)) < 10){
@@ -76,12 +87,12 @@ function draw() {
 
     lineDrawingParameters();
     scoreLogic();
-    console.log(leftHandScore);
     calculateDeltaXY();
 
     seesaw.beginPath();
     seesaw.moveTo(x1, y1);  //line start
     seesaw.lineTo(x2, y2);  //line end
+    seesaw.lineWidth = 5;
     seesaw.strokeStyle = '#ff0000';
     seesaw.stroke();
 
@@ -119,10 +130,10 @@ function keyDownHandler(keyPressed)
         
     }
     if(code == "39"){
-        length-=2;
+        length-=1;
     }
     if(code == "37"){
-        length+=2;
+        length+=1;
     }
 }
 
@@ -139,6 +150,10 @@ function calculateDeltaXY ()
         weightPositionX = ((width/2)+Math.cos(Math.atan(slope))*(-1*length));
         weightPositionY = (height-triangleHeight)+Math.sin(Math.atan(slope))*(-1*length);
     }
+}
+
+function gameover(){
+    ctx.clearRect(0,0,500,500); // clear canvas
 }
 
 
