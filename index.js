@@ -11,14 +11,14 @@
             
     var ballPositionY = 0; //position of the ball in y axis
     var ballPositionX = rand_position_x(500); //position of ball in x axis
-    var ballWeight = 0.005;      //weight of the ball
+    var ballWeight = 0.0025;      //weight of the ball
     var slope = 0;
     var width = 500;        //width of the canvas
     var height = 500;       //height of canvas
     var length= width/2;  //position of the user movable weight
     var weightPositionX = width/2;
     var weightPositionY = (height-triangleHeight);
-    var playerWeight = 1;
+    var playerWeight = 2;
     var leftHandScore = 0;  //keep track of total weight on the left side of the seesaw
     var rightHandScore = 0; //keep track of the total weight on the right side of the seesaw
     var triangleHeight = 150;
@@ -105,13 +105,13 @@ function draw() {
     // debugText.font = "48px serif";
     // debugText.fillText(y1, 400, 425);
 
-    // // var debugText = canvas.getContext("2d");
-    // // debugText.font = "48px serif";
-    // // debugText.fillText(x2, 400, 450);
+    var debugText = canvas.getContext("2d");
+    debugText.font = "48px serif";
+    debugText.fillText(Math.round(leftHandScore), 0, 450);
 
-    // var debugText = canvas.getContext("2d");
-    // debugText.font = "48px serif";
-    // debugText.fillText(y2, 400, 450);
+    var debugText = canvas.getContext("2d");
+    debugText.font = "48px serif";
+    debugText.fillText(Math.round(rightHandScore), 450, 450);
 
     ctx.restore();
     window.requestAnimationFrame(draw);
@@ -121,13 +121,13 @@ function keyDownHandler(keyPressed)
 {   
     var code = keyPressed.keyCode;
 
-    if (code == "87") //left key
+    if (code == "87" || code == "39") //left key
     {   
         console.log("leftbutton pressed");   
         length-=2;
         
     }
-    if (code == "65")   //right key
+    if (code == "65" || code == "37")   //right key
     {   
         console.log("rightbutton pressed");    
         length+=2;
