@@ -1,8 +1,6 @@
 
 
     function start(){
-        var element = document.getElementById("instructions");
-element.parentNode.removeChild(element);
         $('#canvas').css("visibility", "visible");
         draw();
         $('#canvas').css("-webkit-animation", "fadein 1s");

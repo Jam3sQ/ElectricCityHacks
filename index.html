@@ -28,18 +28,7 @@
 			transform: translateY(10%);
 		}
 
-		.instructions-container{
-			width: 500px;
-			top: 50%;
-			transform: translateY(50%);
-			margin: auto;
-			position: relative;
-			text-align: center; 
-			color: white;
-			z-index: 1;
-			-webkit-animation: fadein 2s;
-			animation: fadein 2s;
-		}
+	
 
 		@keyframes fadein {
    			 from {
@@ -64,27 +53,13 @@
 
 	</style>
 </head>
-<body >
+<body onload="start()">
 <div class="body-container">
-<div class="instructions-container" id="instructions">
-<h1>Equillibrator</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<button onclick="start()" id="play">Let's Play</button>
-</div>
+
 <div class="game-container">
 	<canvas id="canvas" width="500" height="500"></canvas>
 </div>
-	
-	
 </div>
-
-
-
 
 </body>
 <script src="index.js"></script>
