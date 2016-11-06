@@ -21,7 +21,7 @@
     var playerWeight = 1;
     var leftHandScore = 0;  //keep track of total weight on the left side of the seesaw
     var rightHandScore = 0; //keep track of the total weight on the right side of the seesaw
-    var triangleHeight = 50;
+    var triangleHeight = 150;
     var contactBall = false;
     var contactPlank = false;
     var x1 = 0; // x parameter for starting point for line
@@ -32,6 +32,7 @@
     
 
 function scoreLogic(){
+    
     if ((ballPositionX - (width/2)) < 0) {
         leftHandScore += (Math.abs(ballPositionX - width/2)*ballWeight);
     };
@@ -57,6 +58,7 @@ function draw() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var seesaw = canvas.getContext("2d");
+    var pivot = canvas.getContext('2d');
 
     var debugText = canvas.getContext("2d");
     debugText.font = "20px serif";
@@ -65,18 +67,24 @@ function draw() {
     ctx.clearRect(0,0,500,500); // clear canvas
     ctx.save();   
     ctx.beginPath(); 
-    ctx.arc(ballPositionX, ballPositionY++, 10, 0, 2 *Math.PI);
+    ctx.arc(ballPositionX, ballPositionY+=3, 10, 0, 2 *Math.PI);
     ctx.fill();
     
-    if (ballPositionY == 500){
-    	ballPositionY = 0;
-    	ballPositionX = rand_position_x(500);
+    // if (ballPositionY == 500){
+    // 	ballPositionY = 0;
+    // 	ballPositionX = rand_position_x(500);
+    // }
+
+    if (Math.abs(-ballPositionY + (-slope*(ballPositionX-250)+350)) < 10){
+        ballPositionY = 0;
+        ballPositionX = rand_position_x(500);
     }
 
     lineDrawingParameters();
     scoreLogic();
     Contacts();
     calculateDeltaXY();
+    console.log(slope);
 
     seesaw.beginPath();
     seesaw.moveTo(x1, y1);  //line start
@@ -89,17 +97,17 @@ function draw() {
     // debugText.fillText(x1, 400, 400);
     document.addEventListener("keydown",keyDownHandler,false);
 
-    var debugText = canvas.getContext("2d");
-    debugText.font = "48px serif";
-    debugText.fillText(y1, 400, 425);
+    // var debugText = canvas.getContext("2d");
+    // debugText.font = "48px serif";
+    // debugText.fillText(y1, 400, 425);
+
+    // // var debugText = canvas.getContext("2d");
+    // // debugText.font = "48px serif";
+    // // debugText.fillText(x2, 400, 450);
 
     // var debugText = canvas.getContext("2d");
     // debugText.font = "48px serif";
-    // debugText.fillText(x2, 400, 450);
-
-    var debugText = canvas.getContext("2d");
-    debugText.font = "48px serif";
-    debugText.fillText(y2, 400, 450);
+    // debugText.fillText(y2, 400, 450);
 
     ctx.restore();
     window.requestAnimationFrame(draw);
@@ -128,17 +136,22 @@ function calculateDeltaXY ()
     if(length<0)
     {
    
-        weightPositionX = (width/2)-Math.cos(Math.atan(slope))*(-1*length);
+        weightPositionX = ((width/2)-Math.cos(Math.atan(slope))*(-1*length));
         weightPositionY = (height-triangleHeight)-Math.sin(Math.atan(slope))*(-1*length);
+
     }
 
     if(length>0)
     {
      
-        weightPositionX = (width/2)+Math.cos(Math.atan(slope))*(-1*length);
+        weightPositionX = ((width/2)+Math.cos(Math.atan(slope))*(-1*length));
         weightPositionY = (height-triangleHeight)+Math.sin(Math.atan(slope))*(-1*length);
     }
 }
+
+
+
+
 
 setTimeout(draw(), 100000);
 
