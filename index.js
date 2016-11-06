@@ -1,4 +1,14 @@
-	//Function for ball to start 
+
+
+    function start(){
+        var element = document.getElementById("instructions");
+element.parentNode.removeChild(element);
+        $('#canvas').css("visibility", "visible");
+        draw();
+        $('#canvas').css("-webkit-animation", "fadein 1s");
+    };
+
+    //Function for ball to start 
     var rand_position_x = function (width){
       return Math.floor(Math.random() * (width + 1));
     };
@@ -93,7 +103,7 @@ function draw() {
     seesaw.moveTo(x1, y1);  //line start
     seesaw.lineTo(x2, y2);  //line end
     seesaw.lineWidth = 5;
-    seesaw.strokeStyle = '#ff0000';
+    //seesaw.strokeStyle = black;
     seesaw.stroke();
 
     document.addEventListener("keydown",keyDownHandler,false);
@@ -153,7 +163,11 @@ function calculateDeltaXY ()
 }
 
 function gameover(){
-    ctx.clearRect(0,0,500,500); // clear canvas
+    //ctx.clearRect(0,0,500,500); // clear canvas
+    var element = document.getElementById("canvas");
+    element.parentNode.removeChild(element);
+    //$('.game-container').createElement('<p/>').text("Pie");
+    $("h1").text("Hi").css("color", "white");
 }
 
 

@@ -2,44 +2,81 @@
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+	<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 	<title></title>
 	<style type="text/css">
 
 		h1{
 			font-size: 2em;
 			text-align: center;
+			color: white;
 		}
 
-		canvas{
+		#canvas{
 			margin: auto;
 			background-color: white;
-			border-radius: 5px;
-
+			border-radius: 2px;
+			visibility: hidden;
 		}
 
-		.body-container{
-			height: 100vh;
-			width: 100vw;
-		}
 
 		.game-container{
 			width: 500px;
 			height: 600px;
 			margin: auto;
+			position: relative;
+			transform: translateY(10%);
 		}
+
+		.instructions-container{
+			width: 500px;
+			top: 50%;
+			transform: translateY(50%);
+			margin: auto;
+			position: relative;
+			text-align: center; 
+			color: white;
+			z-index: 1;
+			-webkit-animation: fadein 2s;
+			animation: fadein 2s;
+		}
+
+		@keyframes fadein {
+   			 from {
+        		opacity:0;
+    			}
+    		to {
+        		opacity:1;
+    			}
+			}
+
+		
+
 		body{
 			overflow-x: hidden;
 			overflow-y: hidden;
 			font-family: 'Nunito', sans-serif;
-			background-color: #009999;
+			background-color: black;
+			height: 100vh;
+			width: 100vw;
+			margin: 0px;
 		}
 
 	</style>
 </head>
-<body onload="draw()">
+<body >
 <div class="body-container">
+<div class="instructions-container" id="instructions">
+<h1>Equillibrator</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<button onclick="start()" id="play">Let's Play</button>
+</div>
 <div class="game-container">
-	<h1>Equillibrator</h1>
 	<canvas id="canvas" width="500" height="500"></canvas>
 </div>
 	
