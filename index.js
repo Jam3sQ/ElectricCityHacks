@@ -11,7 +11,7 @@
             
     var ballPositionY = 0; //position of the ball in y axis
     var ballPositionX = rand_position_x(500); //position of ball in x axis
-    var ballWeight = 0;      //weight of the ball
+    var ballWeight = 0.005;      //weight of the ball
     var slope = 0;
     var width = 500;        //width of the canvas
     var height = 500;       //height of canvas
@@ -32,14 +32,15 @@
     
 
 function scoreLogic(){
-    
-    if ((ballPositionX - (width/2)) < 0) {
-        leftHandScore += (Math.abs(ballPositionX - width/2)*ballWeight);
-    };
-    if((ballPositionX - (width/2)) > 0) {
-        rightHandScore += ((ballPositionX - width/2)*ballWeight);
-    };
-    totalScore = rightHandScore + leftHandScore;
+    if (contactBall) {
+        if (ballPositionX < width/2) {
+          leftHandScore += (Math.abs(ballPositionX - width/2)*ballWeight);
+        };
+        if(ballPositionX > width/2) {
+            rightHandScore += ((ballPositionX - width/2)*ballWeight);
+        };
+        totalScore = rightHandScore + leftHandScore;
+    }
 }
 
 function lineDrawingParameters () {
@@ -48,10 +49,7 @@ function lineDrawingParameters () {
     y2 = (height - triangleHeight) - (slope * (width/2));
 }
 
-function Contacts () {
-    contactBall = (Math.abs(((ballPositionX-(width/2))*slope) - (-ballPositionY + height - triangleHeight)) < 1);
-    contactPlank = ((Math.abs(y1 - height) < 1) || (Math.abs(y2 - height) < 1))
-}
+
 
 //Draws Ball
 function draw() {
@@ -78,13 +76,19 @@ function draw() {
     if (Math.abs(-ballPositionY + (-slope*(ballPositionX-250)+350)) < 10){
         ballPositionY = 0;
         ballPositionX = rand_position_x(500);
+        contactBall = true;
+    }
+
+    contactPlank = ((Math.abs(y1 - height) < 1) || (Math.abs(y2 - height) < 1));
+    if (contactPlank) {
+        gameover();
     }
 
     lineDrawingParameters();
     scoreLogic();
-    Contacts();
+    console.log(leftHandScore);
     calculateDeltaXY();
-    console.log(slope);
+  
 
     seesaw.beginPath();
     seesaw.moveTo(x1, y1);  //line start
@@ -117,13 +121,13 @@ function keyDownHandler(keyPressed)
 {   
     var code = keyPressed.keyCode;
 
-    if (code == "37") //left key
+    if (code == "87") //left key
     {   
         console.log("leftbutton pressed");   
         length-=2;
         
     }
-    if (code == "39")   //right key
+    if (code == "65")   //right key
     {   
         console.log("rightbutton pressed");    
         length+=2;
@@ -149,10 +153,14 @@ function calculateDeltaXY ()
     }
 }
 
+//function gameover(){
+
+    //window.close();
+        
+//}
 
 
 
 
-setTimeout(draw(), 100000);
 
    
