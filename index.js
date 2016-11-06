@@ -88,7 +88,7 @@ function draw() {
         contactBall = true;
     }
 
-    contactPlank = ((Math.abs(y1 - height) < 1) || (Math.abs(y2 - height) < 1));
+    contactPlank = (y1 > height) || (y2 > height);
     if (contactPlank) {
         gameover();
     }
