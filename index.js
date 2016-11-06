@@ -43,7 +43,7 @@ function scoreLogic(){
           leftHandScore += (Math.abs(ballPositionX - width/2)*ballWeight);
         };
         if(ballPositionX > width/2) {
-            rightHandScore += ((ballPositionX - width/2)*ballWeight);
+            rightHandScore += (Math.abs(ballPositionX - width/2)*ballWeight);
         };
         totalScore = rightHandScore + leftHandScore;
     }
@@ -83,6 +83,12 @@ function draw() {
     ctx.fill();
 
     if (Math.abs(-ballPositionY + (-slope*(ballPositionX-250)+350)) < 10){
+        ballPositionY = 0;
+        ballPositionX = rand_position_x(500);
+        contactBall = true;
+    }
+
+    if (ballPositionY>height){
         ballPositionY = 0;
         ballPositionX = rand_position_x(500);
         contactBall = true;
